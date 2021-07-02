@@ -1,0 +1,35 @@
+### get user list
+GET http://localhost:3000/users  
+### get user detail
+GET http://localhost:3000/user/8
+
+### create user
+POST http://localhost:3000/user/create
+content-type: application/json
+
+{
+    "user": {
+      "email":"y_robot@yeah.net",
+      "name":"Yrobot"
+    }
+}
+
+### update user
+POST http://localhost:3000/user/update
+content-type: application/json
+
+{
+    "id": 8,
+    "user": {
+      "name":"xt"
+    }
+}
+
+### delete user
+DELETE http://localhost:3000/user/delete
+content-type: application/json
+
+{
+    "id": 10
+}
+
