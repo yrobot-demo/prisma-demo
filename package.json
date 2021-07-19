@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "node ./server.js",
-    "start:ts": "ts-node ./server.ts",
+    "start": "nodemon --exec ts-node ./server.ts",
     "migrate": "npx prisma migrate dev --name init",
     "studio": "npx prisma studio"
   },
@@ -22,6 +21,7 @@
     "graphql": "^15.5.1",
     "graphql-fields": "^2.0.3",
     "graphql-scalars": "^1.10.0",
+    "nodemon": "^2.0.12",
     "reflect-metadata": "^0.1.13",
     "ts-node": "^10.1.0",
     "type-graphql": "^1.1.1",
