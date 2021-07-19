@@ -1,9 +1,9 @@
 import 'reflect-metadata';
 import { buildSchema, Authorized, Resolver, Query, Ctx, Arg, ObjectType, Field } from 'type-graphql';
 import { ApolloServer, AuthenticationError } from 'apollo-server';
-import { PrismaClient } from './generated/prisma-client';
+import { PrismaClient } from '@generated/prisma-client';
 
-import { resolvers, ResolversEnhanceMap, applyResolversEnhanceMap, User } from './generated/type-graphql';
+import { resolvers, ResolversEnhanceMap, applyResolversEnhanceMap, User } from '@generated/type-graphql';
 
 interface Context {
   user: string;
