@@ -21,6 +21,7 @@
     "graphql": "^15.5.1",
     "graphql-fields": "^2.0.3",
     "graphql-scalars": "^1.10.0",
+    "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.12",
     "reflect-metadata": "^0.1.13",
     "ts-node": "^10.1.0",

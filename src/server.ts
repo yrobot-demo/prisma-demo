@@ -1,47 +1,19 @@
 import 'reflect-metadata';
-import { buildSchema, Authorized, Resolver, Query, Ctx, Arg, ObjectType, Field } from 'type-graphql';
-import { ApolloServer, AuthenticationError } from 'apollo-server';
+import { buildSchema, Authorized } from 'type-graphql';
+import { ApolloServer, ForbiddenError } from 'apollo-server';
+
 import { PrismaClient } from '@generated/prisma-client';
+import { resolvers, ResolversEnhanceMap, applyResolversEnhanceMap } from '@generated/type-graphql';
 
-import { resolvers, ResolversEnhanceMap, applyResolversEnhanceMap, User } from '@generated/type-graphql';
-
-interface Context {
-  user: string;
-  prisma: PrismaClient;
-}
-
-@ObjectType()
-class UserWithToken {
-  @Field()
-  token: string;
-
-  @Field()
-  user: User;
-}
-@Resolver()
-export class LoginResolver {
-  @Query(() => UserWithToken)
-  async login(
-    @Ctx() { prisma }: Context,
-    @Arg('email') email: string,
-    @Arg('password') password: string,
-  ): Promise<UserWithToken> {
-    const result = await prisma.user.findUnique({
-      where: { email },
-    });
-    if (result?.password === password)
-      return {
-        user: result,
-        token: 'token',
-      };
-    throw new AuthenticationError('No such account or The password error');
-  }
-}
+import { LoginResolver, decode } from './auth';
 
 async function main() {
   const resolversEnhanceMap: ResolversEnhanceMap = {
     Post: {
-      _all: [Authorized(['yrobot', 'xt'])],
+      _all: [Authorized(['ADMIN'])],
+    },
+    User: {
+      _all: [Authorized(['ADMIN'])],
     },
   };
 
@@ -51,11 +23,11 @@ async function main() {
     resolvers: [LoginResolver, ...resolvers],
     validate: false,
     authChecker: ({ root, args, context, info }, roles) => {
-      const user = context.user || '';
-
-      console.log({ roles, user });
-
-      return roles.includes(user); // or false if access is denied
+      const role = context?.user?.role;
+      if (roles.length === 0 || roles.includes(role)) {
+        return true;
+      }
+      throw new ForbiddenError('your role is NOT able to call this API');
     },
   });
 
@@ -64,8 +36,11 @@ async function main() {
 
   const server = new ApolloServer({
     schema,
-    context: ({ req }): Context => {
-      const user = req.headers.authorization || '';
+    context: ({ req }) => {
+      let user;
+      if (req.headers.authorization) user = decode(req.headers.authorization);
+      console.log({ user });
+
       return { user, prisma };
     },
   });
