@@ -21,6 +21,7 @@ export type User = {
   email: string
   name: string | null
   password: string | null
+  role: string | null
 }
 
 /**
@@ -739,6 +740,7 @@ export namespace Prisma {
     email: string | null
     name: string | null
     password: string | null
+    role: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -746,6 +748,7 @@ export namespace Prisma {
     email: string | null
     name: string | null
     password: string | null
+    role: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -753,6 +756,7 @@ export namespace Prisma {
     email: number
     name: number
     password: number
+    role: number
     _all: number
   }
 
@@ -770,6 +774,7 @@ export namespace Prisma {
     email?: true
     name?: true
     password?: true
+    role?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -777,6 +782,7 @@ export namespace Prisma {
     email?: true
     name?: true
     password?: true
+    role?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -784,6 +790,7 @@ export namespace Prisma {
     email?: true
     name?: true
     password?: true
+    role?: true
     _all?: true
   }
 
@@ -904,6 +911,7 @@ export namespace Prisma {
     email: string
     name: string | null
     password: string | null
+    role: string | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -930,6 +938,7 @@ export namespace Prisma {
     email?: boolean
     name?: boolean
     password?: boolean
+    role?: boolean
     posts?: boolean | PostFindManyArgs
   }
 
@@ -2485,7 +2494,8 @@ export namespace Prisma {
     id: 'id',
     email: 'email',
     name: 'name',
-    password: 'password'
+    password: 'password',
+    role: 'role'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -2523,6 +2533,7 @@ export namespace Prisma {
     email?: StringFilter | string
     name?: StringNullableFilter | string | null
     password?: StringNullableFilter | string | null
+    role?: StringNullableFilter | string | null
     posts?: PostListRelationFilter
   }
 
@@ -2531,6 +2542,7 @@ export namespace Prisma {
     email?: SortOrder
     name?: SortOrder
     password?: SortOrder
+    role?: SortOrder
   }
 
   export type UserWhereUniqueInput = {
@@ -2546,6 +2558,7 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter | string
     name?: StringNullableWithAggregatesFilter | string | null
     password?: StringNullableWithAggregatesFilter | string | null
+    role?: StringNullableWithAggregatesFilter | string | null
   }
 
   export type PostWhereInput = {
@@ -2587,6 +2600,7 @@ export namespace Prisma {
     email: string
     name?: string | null
     password?: string | null
+    role?: string | null
     posts?: PostCreateNestedManyWithoutAuthorInput
   }
 
@@ -2595,6 +2609,7 @@ export namespace Prisma {
     email: string
     name?: string | null
     password?: string | null
+    role?: string | null
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
   }
 
@@ -2602,6 +2617,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     posts?: PostUpdateManyWithoutAuthorInput
   }
 
@@ -2610,6 +2626,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     posts?: PostUncheckedUpdateManyWithoutAuthorInput
   }
 
@@ -2617,6 +2634,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -2624,6 +2642,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PostCreateInput = {
@@ -3252,6 +3271,7 @@ export namespace Prisma {
     email: string
     name?: string | null
     password?: string | null
+    role?: string | null
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -3259,6 +3279,7 @@ export namespace Prisma {
     email: string
     name?: string | null
     password?: string | null
+    role?: string | null
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -3275,6 +3296,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -3282,6 +3304,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PostUpdateWithoutAuthorInput = {

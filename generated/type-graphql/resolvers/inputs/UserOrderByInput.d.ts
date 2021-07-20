@@ -3,4 +3,5 @@ export declare class UserOrderByInput {
     email?: "asc" | "desc" | undefined;
     name?: "asc" | "desc" | undefined;
     password?: "asc" | "desc" | undefined;
+    role?: "asc" | "desc" | undefined;
 }

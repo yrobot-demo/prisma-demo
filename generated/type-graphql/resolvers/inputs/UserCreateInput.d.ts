@@ -3,5 +3,6 @@ export declare class UserCreateInput {
     email: string;
     name?: string | undefined;
     password?: string | undefined;
+    role?: string | undefined;
     posts?: PostCreateNestedManyWithoutAuthorInput | undefined;
 }

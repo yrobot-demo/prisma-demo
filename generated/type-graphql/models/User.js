@@ -56,6 +56,12 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
+__decorate([
+    TypeGraphQL.Field(_type => String, {
+        nullable: true
+    }),
+    __metadata("design:type", String)
+], User.prototype, "role", void 0);
 User = __decorate([
     TypeGraphQL.ObjectType({
         isAbstract: true

@@ -4,4 +4,5 @@ export declare class UserUpdateWithoutPostsInput {
     email?: StringFieldUpdateOperationsInput | undefined;
     name?: NullableStringFieldUpdateOperationsInput | undefined;
     password?: NullableStringFieldUpdateOperationsInput | undefined;
+    role?: NullableStringFieldUpdateOperationsInput | undefined;
 }

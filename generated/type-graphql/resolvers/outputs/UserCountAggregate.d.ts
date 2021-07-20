@@ -3,5 +3,6 @@ export declare class UserCountAggregate {
     email: number;
     name: number;
     password: number;
+    role: number;
     _all: number;
 }

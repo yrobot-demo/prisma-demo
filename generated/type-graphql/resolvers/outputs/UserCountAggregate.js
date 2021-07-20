@@ -61,6 +61,12 @@ __decorate([
         nullable: false
     }),
     __metadata("design:type", Number)
+], UserCountAggregate.prototype, "role", void 0);
+__decorate([
+    TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+        nullable: false
+    }),
+    __metadata("design:type", Number)
 ], UserCountAggregate.prototype, "_all", void 0);
 UserCountAggregate = __decorate([
     TypeGraphQL.ObjectType({

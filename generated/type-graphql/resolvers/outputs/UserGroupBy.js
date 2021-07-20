@@ -62,6 +62,12 @@ __decorate([
     __metadata("design:type", String)
 ], UserGroupBy.prototype, "password", void 0);
 __decorate([
+    TypeGraphQL.Field(_type => String, {
+        nullable: true
+    }),
+    __metadata("design:type", String)
+], UserGroupBy.prototype, "role", void 0);
+__decorate([
     TypeGraphQL.Field(_type => UserCountAggregate_1.UserCountAggregate, {
         nullable: true
     }),

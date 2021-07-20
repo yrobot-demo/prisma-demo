@@ -4,5 +4,6 @@ export declare class User {
     email: string;
     name?: string | null;
     password?: string | null;
+    role?: string | null;
     posts?: Post[];
 }

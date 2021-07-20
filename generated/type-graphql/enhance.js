@@ -72,21 +72,21 @@ const relationResolversInfo = {
     Post: ["author"]
 };
 const modelsInfo = {
-    User: ["id", "email", "name", "password"],
+    User: ["id", "email", "name", "password", "role"],
     Post: ["id", "createdAt", "title", "published", "authorId"]
 };
 const inputsInfo = {
-    UserWhereInput: ["AND", "OR", "NOT", "id", "email", "name", "password", "posts"],
-    UserOrderByInput: ["id", "email", "name", "password"],
+    UserWhereInput: ["AND", "OR", "NOT", "id", "email", "name", "password", "role", "posts"],
+    UserOrderByInput: ["id", "email", "name", "password", "role"],
     UserWhereUniqueInput: ["id", "email"],
-    UserScalarWhereWithAggregatesInput: ["AND", "OR", "NOT", "id", "email", "name", "password"],
+    UserScalarWhereWithAggregatesInput: ["AND", "OR", "NOT", "id", "email", "name", "password", "role"],
     PostWhereInput: ["AND", "OR", "NOT", "id", "createdAt", "title", "published", "author", "authorId"],
     PostOrderByInput: ["id", "createdAt", "title", "published", "authorId"],
     PostWhereUniqueInput: ["id"],
     PostScalarWhereWithAggregatesInput: ["AND", "OR", "NOT", "id", "createdAt", "title", "published", "authorId"],
-    UserCreateInput: ["email", "name", "password", "posts"],
-    UserUpdateInput: ["email", "name", "password", "posts"],
-    UserUpdateManyMutationInput: ["email", "name", "password"],
+    UserCreateInput: ["email", "name", "password", "role", "posts"],
+    UserUpdateInput: ["email", "name", "password", "role", "posts"],
+    UserUpdateManyMutationInput: ["email", "name", "password", "role"],
     PostCreateInput: ["createdAt", "title", "published", "author"],
     PostUpdateInput: ["createdAt", "title", "published", "author"],
     PostUpdateManyMutationInput: ["createdAt", "title", "published"],
@@ -129,23 +129,23 @@ const inputsInfo = {
     PostUpdateWithWhereUniqueWithoutAuthorInput: ["where", "data"],
     PostUpdateManyWithWhereWithoutAuthorInput: ["where", "data"],
     PostScalarWhereInput: ["AND", "OR", "NOT", "id", "createdAt", "title", "published", "authorId"],
-    UserCreateWithoutPostsInput: ["email", "name", "password"],
+    UserCreateWithoutPostsInput: ["email", "name", "password", "role"],
     UserCreateOrConnectWithoutPostsInput: ["where", "create"],
     UserUpsertWithoutPostsInput: ["update", "create"],
-    UserUpdateWithoutPostsInput: ["email", "name", "password"],
+    UserUpdateWithoutPostsInput: ["email", "name", "password", "role"],
     PostUpdateWithoutAuthorInput: ["createdAt", "title", "published"]
 };
 const outputsInfo = {
     AggregateUser: ["_count", "_avg", "_sum", "_min", "_max"],
-    UserGroupBy: ["id", "email", "name", "password", "_count", "_avg", "_sum", "_min", "_max"],
+    UserGroupBy: ["id", "email", "name", "password", "role", "_count", "_avg", "_sum", "_min", "_max"],
     AggregatePost: ["_count", "_avg", "_sum", "_min", "_max"],
     PostGroupBy: ["id", "createdAt", "title", "published", "authorId", "_count", "_avg", "_sum", "_min", "_max"],
     AffectedRowsOutput: ["count"],
-    UserCountAggregate: ["id", "email", "name", "password", "_all"],
+    UserCountAggregate: ["id", "email", "name", "password", "role", "_all"],
     UserAvgAggregate: ["id"],
     UserSumAggregate: ["id"],
-    UserMinAggregate: ["id", "email", "name", "password"],
-    UserMaxAggregate: ["id", "email", "name", "password"],
+    UserMinAggregate: ["id", "email", "name", "password", "role"],
+    UserMaxAggregate: ["id", "email", "name", "password", "role"],
     PostCountAggregate: ["id", "createdAt", "title", "published", "authorId", "_all"],
     PostAvgAggregate: ["id", "authorId"],
     PostSumAggregate: ["id", "authorId"],
