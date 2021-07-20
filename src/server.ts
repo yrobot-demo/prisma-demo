@@ -7,6 +7,8 @@ import { resolvers, ResolversEnhanceMap, applyResolversEnhanceMap } from '@gener
 
 import { LoginResolver, decode } from './auth';
 
+const isProduction = () => process.env.ENV === 'production';
+
 async function main() {
   const resolversEnhanceMap: ResolversEnhanceMap = {
     Post: {
@@ -43,6 +45,7 @@ async function main() {
 
       return { user, prisma };
     },
+    debug: !isProduction(),
   });
   const { port } = await server.listen(4000);
   console.log(`GraphQL is runing on http://localhost:${port}`);

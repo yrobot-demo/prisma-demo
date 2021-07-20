@@ -13,7 +13,12 @@ export const decode = (token, options = {}) => {
   }
 };
 
-const pickUserInfo = ({ email, name, role, id }) => ({ email, name, role, id });
+const pickUserInfo = ({ email, name, role, id }) => ({
+  // email,
+  name,
+  role,
+  id,
+});
 
 @ObjectType()
 class UserInfo {
