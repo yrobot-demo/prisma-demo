@@ -20,7 +20,7 @@ class UserWithToken {
 }
 @Resolver()
 export class LoginResolver {
-  @Query((returns) => UserWithToken)
+  @Query(() => UserWithToken)
   async login(
     @Ctx() { prisma }: Context,
     @Arg('email') email: string,
