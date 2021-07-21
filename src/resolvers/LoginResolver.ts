@@ -12,22 +12,17 @@ class UserInfo {
 }
 
 @ObjectType()
-class LoginReponse {
+class Login {
   @Field()
   token: string;
-
   @Field((type) => UserInfo)
   user: UserInfo;
 }
 
 @Resolver()
 export default class LoginResolver {
-  @Query(() => LoginReponse)
-  async login(
-    @Ctx() { prisma },
-    @Arg('email') email: string,
-    @Arg('password') password: string,
-  ): Promise<LoginReponse> {
+  @Query(() => Login)
+  async login(@Ctx() { prisma }, @Arg('email') email: string, @Arg('password') password: string): Promise<Login> {
     const user = await prisma.user.findUnique({
       where: { email },
     });
