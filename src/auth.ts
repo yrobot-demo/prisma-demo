@@ -1,5 +1,4 @@
-import { Resolver, Query, Ctx, Arg, ObjectType, Field } from 'type-graphql';
-import { AuthenticationError } from 'apollo-server';
+import { AuthenticationError, ForbiddenError } from 'apollo-server';
 const jwt = require('jsonwebtoken');
 
 const JWT_KEY = 'auth_server_JWT_key';
@@ -13,46 +12,17 @@ export const decode = (token, options = {}) => {
   }
 };
 
-const pickUserInfo = ({ email, name, role, id }) => ({
+export const tokenDataTranslater = ({ email, name, role, id }) => ({
   // email,
   name,
   role,
   id,
 });
 
-@ObjectType()
-class UserInfo {
-  @Field()
-  name: string;
-  @Field()
-  email: string;
-}
-
-@ObjectType()
-class LoginReponse {
-  @Field()
-  token: string;
-
-  @Field((type) => UserInfo)
-  user: UserInfo;
-}
-
-@Resolver()
-export class LoginResolver {
-  @Query(() => LoginReponse)
-  async login(
-    @Ctx() { prisma },
-    @Arg('email') email: string,
-    @Arg('password') password: string,
-  ): Promise<LoginReponse> {
-    const user = await prisma.user.findUnique({
-      where: { email },
-    });
-    if (user?.password === password)
-      return {
-        user: user,
-        token: encode(pickUserInfo(user)),
-      };
-    throw new AuthenticationError('No such account or The password error');
+export const authChecker = ({ root, args, context, info }, roles) => {
+  const role = context?.user?.role;
+  if (roles.length === 0 || roles.includes(role)) {
+    return true;
   }
-}
+  throw new ForbiddenError('Your role is NOT able to call this API');
+};
