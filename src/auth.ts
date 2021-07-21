@@ -3,8 +3,8 @@ const jwt = require('jsonwebtoken');
 
 const JWT_KEY = 'auth_server_JWT_key';
 
-export const encode = (user, options = {}) => jwt.sign(user, JWT_KEY, { ...options });
-export const decode = (token, options = {}) => {
+export const encode = (user, options = {}): string => jwt.sign(user, JWT_KEY, { ...options });
+export const decode = (token, options = {}): TokenUser => {
   try {
     return jwt.verify(token, JWT_KEY, options);
   } catch (error) {
@@ -12,14 +12,20 @@ export const decode = (token, options = {}) => {
   }
 };
 
-export const tokenDataTranslater = ({ email, name, role, id }) => ({
+export interface TokenUser {
+  name: string;
+  role: string;
+  id: number;
+}
+
+export const tokenDataTranslater = ({ email, name, role, id }): TokenUser => ({
   // email,
   name,
   role,
   id,
 });
 
-export const authChecker = ({ root, args, context, info }, roles) => {
+export const authChecker = ({ root, args, context, info }, roles): boolean => {
   const role = context?.user?.role;
   if (roles.length === 0 || roles.includes(role)) {
     return true;
