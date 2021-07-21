@@ -3,7 +3,7 @@ import { buildSchema, Authorized } from 'type-graphql';
 import { resolvers, ResolversEnhanceMap, applyResolversEnhanceMap } from '@generated/type-graphql';
 import { authChecker } from '../auth';
 
-import LoginResolver from './LoginResolver';
+import AuthResolver from './AuthResolver';
 
 const getSchema = async () => {
   const resolversEnhanceMap: ResolversEnhanceMap = {
@@ -16,7 +16,7 @@ const getSchema = async () => {
   applyResolversEnhanceMap(resolversEnhanceMap);
 
   return await buildSchema({
-    resolvers: [LoginResolver, ...resolvers],
+    resolvers: [AuthResolver, ...resolvers],
     validate: false,
     authChecker: authChecker,
   });

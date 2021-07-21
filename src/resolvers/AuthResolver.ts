@@ -20,7 +20,7 @@ class Login {
 }
 
 @Resolver()
-export default class LoginResolver {
+export default class AuthResolver {
   @Query(() => Login)
   async login(@Ctx() { prisma }, @Arg('email') email: string, @Arg('password') password: string): Promise<Login> {
     const user = await prisma.user.findUnique({
