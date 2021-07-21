@@ -1,7 +1,7 @@
 import { Resolver, Query, Ctx, Arg, ObjectType, Field } from 'type-graphql';
 import { AuthenticationError } from 'apollo-server';
 
-import { encode, tokenDataTranslater } from '../auth';
+import { encode } from '../auth';
 
 @ObjectType()
 class UserInfo {
@@ -34,7 +34,7 @@ export default class LoginResolver {
     if (user?.password === password)
       return {
         user: user,
-        token: encode(tokenDataTranslater(user)),
+        token: encode(user),
       };
     throw new AuthenticationError('No such account or the password error');
   }
