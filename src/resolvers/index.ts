@@ -17,7 +17,6 @@ const getSchema = async () => {
 
   return await buildSchema({
     resolvers: [AuthResolver, ...resolvers],
-    validate: false,
     authChecker: authChecker,
   });
 };
