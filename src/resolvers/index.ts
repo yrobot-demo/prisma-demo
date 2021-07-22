@@ -3,25 +3,29 @@ import { IsEmail, ValidateNested } from 'class-validator';
 
 import {
   resolvers,
-  ResolversEnhanceMap,
   applyResolversEnhanceMap,
-  applyArgsTypesEnhanceMap,
+  applyRelationResolversEnhanceMap,
+  applyModelsEnhanceMap,
+  applyOutputTypesEnhanceMap,
   applyInputTypesEnhanceMap,
+  applyArgsTypesEnhanceMap,
 } from '@generated/type-graphql';
 import { authChecker } from '../auth';
 
 import AuthResolver from './AuthResolver';
 
 const getSchema = async () => {
-  const resolversEnhanceMap: ResolversEnhanceMap = {
-    Post: {},
+  applyResolversEnhanceMap({
     User: {
-      _all: [Authorized(['ADMIN'])],
-      createUser: [],
+      createUser: [Authorized(['ADMIN'])],
     },
-  };
+  });
 
-  applyResolversEnhanceMap(resolversEnhanceMap);
+  applyRelationResolversEnhanceMap({});
+
+  applyModelsEnhanceMap({});
+
+  applyOutputTypesEnhanceMap({});
 
   applyArgsTypesEnhanceMap({
     CreateUserArgs: {
