@@ -1,36 +1,55 @@
-import { Resolver, Query, Ctx, Arg, ObjectType, Field } from 'type-graphql';
-import { AuthenticationError } from 'apollo-server';
+import {
+  Resolver,
+  Query,
+  Ctx,
+  Arg,
+  ObjectType,
+  Field,
+  InputType,
+} from 'type-graphql'
+import { AuthenticationError } from 'apollo-server'
 
-import { encode } from '../auth';
+import { encode } from '../auth'
 
 @ObjectType()
 class UserInfo {
   @Field()
-  name: string;
+  name: string
   @Field()
-  email: string;
+  email: string
 }
 
 @ObjectType()
 class Login {
   @Field()
-  token: string;
+  token: string
   @Field((type) => UserInfo)
-  user: UserInfo;
+  user: UserInfo
 }
 
+@InputType()
+class LoginInput {
+  @Field()
+  email: string
+  @Field()
+  password: string
+}
 @Resolver()
 export default class AuthResolver {
   @Query(() => Login)
-  async login(@Ctx() { prisma }, @Arg('email') email: string, @Arg('password') password: string): Promise<Login> {
+  async login(
+    @Ctx() { prisma },
+    @Arg('input') loginInput: LoginInput,
+  ): Promise<Login> {
+    const { email, password } = loginInput
     const user = await prisma.user.findUnique({
       where: { email },
-    });
+    })
     if (user?.password === password)
       return {
         user: user,
         token: encode(user),
-      };
-    throw new AuthenticationError('No such account or the password error');
+      }
+    throw new AuthenticationError('No such account or the password error')
   }
 }
