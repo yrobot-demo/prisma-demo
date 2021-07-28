@@ -9,11 +9,13 @@ import {
 } from 'type-graphql'
 import { AuthenticationError } from 'apollo-server'
 
+import { Field as MyField } from './Field'
+import { UnField } from './Unfield'
 import { encode } from '../auth'
 
 @ObjectType()
 class UserInfo {
-  @Field()
+  @MyField()
   name: string
   @Field()
   email: string
@@ -21,7 +23,7 @@ class UserInfo {
 
 @ObjectType()
 class Login {
-  @Field()
+  @MyField()
   token: string
   @Field((type) => UserInfo)
   user: UserInfo
@@ -29,7 +31,7 @@ class Login {
 
 @InputType()
 class LoginInput {
-  @Field()
+  @MyField()
   email: string
   @Field()
   password: string

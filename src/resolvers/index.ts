@@ -1,5 +1,5 @@
-import { buildSchema, Authorized } from 'type-graphql';
-import { IsEmail, ValidateNested } from 'class-validator';
+import { buildSchema, Authorized, Field } from 'type-graphql'
+import { IsEmail, ValidateNested } from 'class-validator'
 
 import {
   resolvers,
@@ -9,23 +9,31 @@ import {
   applyOutputTypesEnhanceMap,
   applyInputTypesEnhanceMap,
   applyArgsTypesEnhanceMap,
-} from '@generated/type-graphql';
-import { authChecker } from '../auth';
+} from '@generated/type-graphql'
+import { authChecker } from '../auth'
 
-import AuthResolver from './AuthResolver';
+import AuthResolver from './AuthResolver'
+
+import { UnField } from './Unfield'
 
 const getSchema = async () => {
   applyResolversEnhanceMap({
     User: {
       createUser: [Authorized(['ADMIN'])],
     },
-  });
+  })
 
-  applyRelationResolversEnhanceMap({});
+  applyRelationResolversEnhanceMap({})
 
-  applyModelsEnhanceMap({});
+  applyModelsEnhanceMap({
+    User: {
+      fields: {
+        password: [UnField()],
+      },
+    },
+  })
 
-  applyOutputTypesEnhanceMap({});
+  applyOutputTypesEnhanceMap({})
 
   applyArgsTypesEnhanceMap({
     CreateUserArgs: {
@@ -33,7 +41,7 @@ const getSchema = async () => {
         data: [ValidateNested()],
       },
     },
-  });
+  })
 
   applyInputTypesEnhanceMap({
     UserCreateInput: {
@@ -41,12 +49,17 @@ const getSchema = async () => {
         email: [IsEmail()],
       },
     },
-  });
+    PostCreateInput: {
+      fields: {
+        author: [],
+      },
+    },
+  })
 
   return await buildSchema({
     resolvers: [AuthResolver, ...resolvers],
     authChecker: authChecker,
-  });
-};
+  })
+}
 
-export default getSchema;
+export default getSchema
