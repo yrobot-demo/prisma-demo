@@ -47,11 +47,7 @@ const getSchema = async () => {
     UserCreateInput: {
       fields: {
         email: [IsEmail()],
-      },
-    },
-    PostCreateInput: {
-      fields: {
-        author: [],
+        posts: [UnField()],
       },
     },
   })

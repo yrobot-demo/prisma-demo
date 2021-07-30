@@ -10,7 +10,6 @@ import {
 import { AuthenticationError } from 'apollo-server'
 
 import { Field as MyField } from './Field'
-import { UnField } from './Unfield'
 import { encode } from '../auth'
 
 @ObjectType()
