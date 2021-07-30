@@ -2,7 +2,6 @@ import { buildSchema, Authorized, Field } from 'type-graphql'
 import { IsEmail, ValidateNested } from 'class-validator'
 
 import {
-  resolvers,
   applyResolversEnhanceMap,
   applyRelationResolversEnhanceMap,
   applyModelsEnhanceMap,
@@ -12,7 +11,7 @@ import {
 } from '@/generated/type-graphql'
 import { authChecker } from '../auth'
 
-import AuthResolver from './AuthResolver'
+import { resolvers } from './resolvers'
 
 import { UnField } from '@/src/Decorators/Unfield'
 
@@ -53,7 +52,7 @@ const getSchema = async () => {
   })
 
   return await buildSchema({
-    resolvers: [AuthResolver, ...resolvers],
+    resolvers,
     authChecker: authChecker,
   })
 }

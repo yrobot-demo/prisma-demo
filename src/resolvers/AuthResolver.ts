@@ -36,7 +36,7 @@ class LoginInput {
   password: string
 }
 @Resolver()
-export default class AuthResolver {
+export class AuthResolver {
   @Query(() => Login)
   async login(
     @Ctx() { prisma },
