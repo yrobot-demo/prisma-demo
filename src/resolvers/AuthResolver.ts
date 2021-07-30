@@ -9,7 +9,7 @@ import {
 } from 'type-graphql'
 import { AuthenticationError } from 'apollo-server'
 
-import { Field as MyField } from './Field'
+import { Field as MyField } from '../Decorators/Field'
 import { encode } from '../auth'
 
 @ObjectType()

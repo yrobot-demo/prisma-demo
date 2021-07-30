@@ -14,7 +14,7 @@ import { authChecker } from '../auth'
 
 import AuthResolver from './AuthResolver'
 
-import { UnField } from './Unfield'
+import { UnField } from '../Decorators/Unfield'
 
 const getSchema = async () => {
   applyResolversEnhanceMap({
