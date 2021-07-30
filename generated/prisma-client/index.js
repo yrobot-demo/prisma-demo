@@ -25,12 +25,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 2.26.0
- * Query Engine version: 9b816b3aa13cc270074f172f30d6eda8a8ce867d
+ * Prisma Client JS version: 2.27.0
+ * Query Engine version: cdba6ec525e0213cce26f8e4bb23cf556d1479bb
  */
 Prisma.prismaVersion = {
-  client: "2.26.0",
-  engine: "9b816b3aa13cc270074f172f30d6eda8a8ce867d"
+  client: "2.27.0",
+  engine: "cdba6ec525e0213cce26f8e4bb23cf556d1479bb"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -126,8 +126,8 @@ const config = {
     "rootEnvPath": null
   },
   "relativePath": "../../prisma",
-  "clientVersion": "2.26.0",
-  "engineVersion": "9b816b3aa13cc270074f172f30d6eda8a8ce867d",
+  "clientVersion": "2.27.0",
+  "engineVersion": "cdba6ec525e0213cce26f8e4bb23cf556d1479bb",
   "datasourceNames": [
     "db"
   ],
@@ -156,8 +156,8 @@ Object.assign(exports, Prisma)
  * In order to make `ncc` and `@vercel/nft` happy.
  * The process.cwd() annotation is only needed for https://github.com/vercel/vercel/tree/master/packages/now-next
 **/
-path.join(__dirname, 'query-engine-darwin');
-path.join(process.cwd(), './generated/prisma-client/query-engine-darwin');
+path.join(__dirname, 'query-engine-darwin-arm64');
+path.join(process.cwd(), './generated/prisma-client/query-engine-darwin-arm64');
 
 /**
  * Annotation for `@vercel/nft`
