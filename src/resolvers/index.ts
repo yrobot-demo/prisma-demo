@@ -14,6 +14,7 @@ import { authChecker } from '../auth'
 import { resolvers } from './resolvers'
 
 import { UnField } from '@/src/Decorators/Unfield'
+import { Log } from '@/src/Middlewares/Log'
 
 const getSchema = async () => {
   applyResolversEnhanceMap({
@@ -53,6 +54,7 @@ const getSchema = async () => {
 
   return await buildSchema({
     resolvers,
+    globalMiddlewares: [Log],
     authChecker: authChecker,
   })
 }
