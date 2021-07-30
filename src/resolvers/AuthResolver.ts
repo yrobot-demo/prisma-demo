@@ -9,8 +9,8 @@ import {
 } from 'type-graphql'
 import { AuthenticationError } from 'apollo-server'
 
-import { Field as MyField } from '../Decorators/Field'
-import { encode } from '../auth'
+import { Field as MyField } from '@/src/Decorators/Field'
+import { encode } from '@/src/auth'
 
 @ObjectType()
 class UserInfo {

@@ -9,12 +9,12 @@ import {
   applyOutputTypesEnhanceMap,
   applyInputTypesEnhanceMap,
   applyArgsTypesEnhanceMap,
-} from '@generated/type-graphql'
+} from '@/generated/type-graphql'
 import { authChecker } from '../auth'
 
 import AuthResolver from './AuthResolver'
 
-import { UnField } from '../Decorators/Unfield'
+import { UnField } from '@/src/Decorators/Unfield'
 
 const getSchema = async () => {
   applyResolversEnhanceMap({

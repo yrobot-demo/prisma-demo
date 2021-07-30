@@ -2,7 +2,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@generated/*": ["./generated/*"]
+      "@/*": [
+        "./*"
+      ]
     },
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,

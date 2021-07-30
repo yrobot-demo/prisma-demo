@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { ApolloServer } from 'apollo-server';
 
-import { PrismaClient } from '@generated/prisma-client';
+import { PrismaClient } from '@/generated/prisma-client';
 
 import { decode, TokenUser } from './auth';
 import { isProduction, port } from './env';
