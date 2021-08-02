@@ -12,13 +12,12 @@
   "author": "yrobot",
   "license": "ISC",
   "dependencies": {
-    "prisma": "~2.27.0",
     "@prisma/client": "~2.27.0",
-    "typegraphql-prisma": "0.14.7",
     "@types/graphql-fields": "^1.3.4",
     "apollo-server": "^3.0.0",
     "body-parser": "^1.19.0",
     "class-validator": "^0.13.1",
+    "dayjs": "^1.10.6",
     "express": "^4.17.1",
     "express-graphql": "^0.12.0",
     "graphql": "^15.5.1",
@@ -26,10 +25,14 @@
     "graphql-scalars": "^1.10.0",
     "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.12",
+    "prisma": "~2.27.0",
     "reflect-metadata": "^0.1.13",
     "ts-node": "^10.1.0",
     "tsconfig-paths": "^3.10.1",
     "type-graphql": "^1.1.1",
-    "typescript": "^4.3.5"
+    "typegraphql-prisma": "0.14.7",
+    "typescript": "^4.3.5",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.5"
   }
 }

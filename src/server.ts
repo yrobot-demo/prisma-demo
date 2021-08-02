@@ -7,6 +7,7 @@ import { decode, TokenUser } from './auth'
 import { isProduction, port } from './env'
 
 import getSchema from './resolvers'
+import { logger } from './Plugins/logger'
 
 interface Context {
   prisma: PrismaClient
@@ -26,6 +27,7 @@ async function main() {
       return { currentUser, prisma }
     },
     debug: !isProduction,
+    plugins: [logger()],
   })
   const { url } = await server.listen(port)
   console.log(`GraphQL is runing on ${url}`)

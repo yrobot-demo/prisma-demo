@@ -8,17 +8,14 @@ export class Log implements MiddlewareInterface {
   async use(action, next: NextFn) {
     const {
       info,
-      variableValues,
       root,
+      args,
       context: { currentUser },
     } = action
     // const start = Date.now()
-    this.logger.log(currentUser)
-    this.logger.log(variableValues)
-    this.logger.log(`${info.parentType.name}.${info.fieldName}`)
-    this.logger.log(root)
-    const result = await next()
-    console.log({ result })
-    return result
+    // this.logger.log(args)
+    // this.logger.log(info.variableValues)
+    // this.logger.log('--------------')
+    return await next()
   }
 }
