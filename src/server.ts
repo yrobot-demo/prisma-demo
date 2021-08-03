@@ -12,6 +12,7 @@ import { logger } from './Plugins/logger'
 interface Context {
   prisma: PrismaClient
   currentUser?: TokenUser
+  token?: string
 }
 
 async function main() {
@@ -21,13 +22,14 @@ async function main() {
   const server = new ApolloServer({
     schema: await getSchema(),
     context: ({ req }): Context => {
-      let currentUser = null
-      if (req.headers.authorization)
-        currentUser = decode(req.headers.authorization)
-      return { currentUser, prisma }
+      return { prisma, token: req.headers.authorization }
     },
-    debug: !isProduction,
+    debug: true,
     plugins: [logger()],
+    formatError: (err) => {
+      const { extensions, locations, ...error } = err
+      return error
+    },
   })
   const { url } = await server.listen(port)
   console.log(`GraphQL is runing on ${url}`)

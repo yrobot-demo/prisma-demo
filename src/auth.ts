@@ -14,7 +14,7 @@ const tokenDataTranslater = ({ email, name, role, id }): TokenUser => ({
   id,
 })
 
-const JWT_KEY = 'auth_server_JWT_key'
+const JWT_KEY = 'PRISMA_DEMO_AUTH_JWT_KEY'
 
 export const encode = (user, options = {}): string =>
   jwt.sign(tokenDataTranslater(user), JWT_KEY, { ...options })
@@ -22,7 +22,9 @@ export const decode = (token, options = {}): TokenUser => {
   try {
     return jwt.verify(token, JWT_KEY, options)
   } catch (error) {
-    throw new AuthenticationError(error.message)
+    throw new AuthenticationError('签名失效，请重新登录', {
+      error,
+    })
   }
 }
 
@@ -30,11 +32,16 @@ export const authChecker = (
   { root, args, context, info },
   roles = [],
 ): boolean => {
-  const role = context.currentUser?.role
+  let currentUser = null
+  if (context.token) {
+    currentUser = decode(context.token)
+  }
+  context.currentUser = currentUser
+  const role = currentUser?.role
 
   // @Authorized() 登陆后可请求
   if (role === undefined) {
-    throw new ForbiddenError('Please login first')
+    throw new ForbiddenError('请先登陆')
   }
 
   if (roles.length === 0) {
@@ -43,5 +50,8 @@ export const authChecker = (
     return true
   }
 
-  throw new ForbiddenError('Permission denied')
+  throw new ForbiddenError('当前用户没有权限', {
+    roles,
+    currentRole: role,
+  })
 }

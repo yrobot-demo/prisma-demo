@@ -8,7 +8,7 @@ interface Config {
 const createLogger = ({ bussiness }: Config) =>
   winston.createLogger({
     transports: [
-      new winston.transports.Console(),
+      // new winston.transports.Console(),
       new DailyRotateFile({
         filename: `%DATE%.log`,
         datePattern: 'YYYY-MM-DD',

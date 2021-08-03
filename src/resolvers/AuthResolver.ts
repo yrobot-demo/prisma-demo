@@ -51,6 +51,6 @@ export class AuthResolver {
         user: user,
         token: encode(user),
       }
-    throw new AuthenticationError('No such account or the password error')
+    throw new AuthenticationError('用户名不存在 或 密码错误')
   }
 }

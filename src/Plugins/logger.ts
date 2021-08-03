@@ -1,7 +1,22 @@
 import { ApolloServerPlugin } from 'apollo-server-plugin-base'
 // import * as dayjs from 'dayjs'
 
-import { logRequest } from '@/src/utils/logger'
+import { logRequest, logError } from '@/src/utils/logger'
+
+interface RequestLog {
+  requestId: Number
+  runTime?: Number
+  at?: Date
+  request: {
+    schema: string
+    variables: any
+    token: string
+  }
+  response?: {
+    data: any
+    errors: Array<any>
+  }
+}
 
 export const logger = (): ApolloServerPlugin => {
   return {
@@ -15,18 +30,18 @@ export const logger = (): ApolloServerPlugin => {
     },
     async requestDidStart(requestContext) {
       const shouldLog =
-        requestContext.request.operationName !== 'IntrospectionQuery'
-      const requestId = Date.now()
-      const requestLogger = logRequest.child({ requestId })
-      if (shouldLog) {
-        requestLogger.info('request', {
-          context: {
-            schema: `${requestContext.request.query}`,
-            variables: requestContext.request.variables,
-            token:
-              requestContext.request.http.headers.get('Authorization') || '',
-          },
-        })
+        requestContext.request.operationName !== 'IntrospectionQuery' // apollo studio 会轮训获取最新的 graphql schema，这边就加一个对这个轮训不做埋点
+      const startAt = Date.now()
+      const requestId = startAt
+      const requestLogConetext: RequestLog = {
+        requestId,
+        at: new Date(),
+        request: {
+          schema: `${requestContext.request.query}`,
+          variables: requestContext.request.variables,
+          token: requestContext.request.http.headers.get('Authorization') || '',
+        },
+        response: null,
       }
       requestContext.response.http.headers.set('request-id', requestId + '')
       return {
@@ -36,12 +51,22 @@ export const logger = (): ApolloServerPlugin => {
         async willSendResponse(requestContext) {
           if (shouldLog) {
             const { http, extensions, ...response } = requestContext.response
-            requestLogger.info('response', {
-              context: JSON.parse(JSON.stringify(response)),
+            requestLogConetext.response = JSON.parse(JSON.stringify(response))
+            requestLogConetext.runTime = Date.now() - startAt
+            logRequest.info('request', {
+              context: requestLogConetext,
             })
           }
         },
-        // async didEncounterErrors(requestContext) {},
+        async didEncounterErrors(requestContext) {
+          logError.error('error', {
+            context: {
+              requestId,
+              at: new Date(),
+              errors: requestContext.errors,
+            },
+          })
+        },
       }
     },
   }
