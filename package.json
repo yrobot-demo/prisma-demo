@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec ts-node -r tsconfig-paths/register src/server.ts",
-    "start:production": "ENV=production ts-node -r tsconfig-paths/register src/server.ts",
-    "migrate": "npx prisma migrate dev --name init",
-    "studio": "npx prisma studio"
+    "server": "nodemon --exec ts-node -r tsconfig-paths/register src/server.ts",
+    "server:production": "ENV=production ts-node -r tsconfig-paths/register src/server.ts",
+    "migrate": "yarn prisma migrate dev",
+    "studio": "yarn prisma studio"
   },
   "author": "yrobot",
   "license": "ISC",
