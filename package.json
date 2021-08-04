@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "server": "node ./server.js",
-    "migrate": "npx prisma migrate dev --name init",
-    "studio": "npx prisma studio"
+    "migrate": "yarn prisma migrate dev",
+    "studio": "yarn prisma studio"
   },
   "author": "yrobot",
   "license": "ISC",

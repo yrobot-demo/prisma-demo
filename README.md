@@ -8,10 +8,10 @@ if you like this guide, start this repo, thanks.
 
 ## test prisma in http server?
 
-1. `yarn`
-2. `npm run migrate`
-3. `npm run server`
-4. `npm run studio` (optional, open GUI to edit DB)
+1. `yarn` (install npm packages)
+2. `yarn migrate` (create migrations from your Prisma schema, apply them to the database, generate artifacts (e.g. Prisma Client))
+3. `yarn server` (start node server)
+4. `yarn studio` (optional, open GUI to edit DB)
 
 the server will run at http://localhost:3000
 
@@ -20,5 +20,5 @@ the server will run at http://localhost:3000
 ## test prisma in nodejs
 
 1. `yarn`
-2. `npm run migrate`
+2. `yarn migrate`
 3. `node ./test.js`
