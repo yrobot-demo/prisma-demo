@@ -4,7 +4,7 @@ This repo is the demo of guide [《使用 Prisma 搭建 graphql 服务的最佳�
 
 please read [my blog](https://blog.yrobot.top/blog/Server/使用Prisma搭建graphql服务的最佳实践) first.
 
-if you like this guide, start this repo, thanks.
+if you like this guide, STAR this repo, thanks.
 
 ## test prisma in graphql server using apollo studio
 
