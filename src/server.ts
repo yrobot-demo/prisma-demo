@@ -7,7 +7,7 @@ import { decode, TokenUser } from './auth'
 import { isProduction, port } from './env'
 
 import getSchema from './resolvers'
-import { logger } from './Plugins/logger'
+import { logPlugin } from './Plugins/logPlugin'
 
 interface Context {
   prisma: PrismaClient
@@ -25,7 +25,7 @@ async function main() {
       return { prisma, token: req.headers.authorization }
     },
     debug: true,
-    plugins: [logger()],
+    plugins: [logPlugin()],
     formatError: (err) => {
       const { extensions, locations, ...error } = err
       return error

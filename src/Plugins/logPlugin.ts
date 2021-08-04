@@ -18,7 +18,7 @@ interface RequestLog {
   }
 }
 
-export const logger = (): ApolloServerPlugin => {
+export const logPlugin = (): ApolloServerPlugin => {
   return {
     async serverWillStart(service) {
       // logRequest.info('server', {
